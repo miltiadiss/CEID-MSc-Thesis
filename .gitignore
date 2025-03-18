@@ -1,0 +1,80 @@
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore virtual environments
+.env
+.venv/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Ignore build and distribution files
+build/
+dist/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Ignore logs and cache
+*.log
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Ignore IDE and editor-specific files
+.vscode/
+.idea/
+*.sublime-workspace
+*.swp
+
+# Ignore IPython and Jupyter config
+profile_default/
+ipython_config.py
+
+# Ignore dataset files (if you have large datasets, add their extensions here)
+*.csv
+*.tsv
+*.json
+*.xlsx
+*.h5
+*.pkl
+*.parquet
+
+# Ignore debugging files
+cython_debug/
+
+# Ignore dependencies lock files (for dependency managers)
+poetry.lock
+Pipfile.lock
+pdm.lock
+.pdm.toml
+.pdm-python
+.pdm-build/
+
+# Ignore type checkers cache
+.mypy_cache/
+.pyre/
+.pytype/
+
+# Ignore linter cache
+.ruff_cache/
+
+# Custom ignores
+.DS_Store
+Thumbs.db
