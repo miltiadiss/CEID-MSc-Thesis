@@ -1,0 +1,35 @@
+# Virtual environments
+venv/
+.env/
+.virtualenvs/
+
+# Logs and debug files
+logs/
+*.log
+debug.log
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Build files
+build/
+dist/
+*.egg-info/
+
+# Hidden system files 
+Thumbs.db
+.DS_Store
+
+# Dataset folders
+RSDB/
+
+# Output folders
+out/
+
+corrected_audio_dcse/
+
+# npy files
+*.npy
+
+# csv files
+*.csv
