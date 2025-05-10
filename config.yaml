@@ -1,0 +1,19 @@
+audio_processing:
+  sampling_rate: 4000
+  frame_length: 0.06
+  hop_length: 0.03
+  n_mfcc: 13
+  n_mels: 64
+  f_hi: 2000
+  target_duration: 8.0
+
+paths:
+  data_folder: "RSDB"
+  audio_folder: "RSDB/audio_and_txt_files"
+  output_folder: "out"
+  raw_cycle_folder: "out/raw_cycles"
+  aug_cycle_folder: "out/aug_cycles"
+  cleaned_cycle_folder: "out/cleaned_audio_cycles"
+  final_csv: "out/final_dataset.csv"
+  plot_folder: "out/corrected_spectrograms"
+  corrected_audio_folder: "out/corrected_audio_files"
