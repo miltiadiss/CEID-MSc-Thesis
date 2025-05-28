@@ -264,8 +264,7 @@ def perform_pca_and_tsne(
     tsne_components: int,
     perplexity: int,
     n_features: int,
-    feature_names: list = None,
-    plot_feature_contribution = True
+    feature_names: list = None
 ) -> None:
     """
     Apply PCA and t-SNE on the given feature matrix and visualize the results.
@@ -333,31 +332,30 @@ def perform_pca_and_tsne(
     plt.show()
 
     # PCA Feature Contribution Aggregation 
-    if(plot_feature_contribution==True):
-        total_dims = X.shape[1]
-        assert total_dims % n_features == 0, "Feature dimensions not divisible by n_features"
-        n_frames = total_dims // n_features
+    total_dims = X.shape[1]
+    assert total_dims % n_features == 0, "Feature dimensions not divisible by n_features"
+    n_frames = total_dims // n_features
 
-        loadings = pca.components_.T * np.sqrt(pca.explained_variance_)  # shape: (frames × features, components)
-        total_contribution = np.zeros(n_features)
-        for feat_idx in range(n_features):
-            indices = [f * n_features + feat_idx for f in range(n_frames)]
-            total_contribution[feat_idx] = np.sum(np.abs(loadings[indices, :]))
+    loadings = pca.components_.T * np.sqrt(pca.explained_variance_)  # shape: (frames × features, components)
+    total_contribution = np.zeros(n_features)
+    for feat_idx in range(n_features):
+        indices = [f * n_features + feat_idx for f in range(n_frames)]
+        total_contribution[feat_idx] = np.sum(np.abs(loadings[indices, :]))
 
-        contrib_df = pd.DataFrame({
-            "Feature": feature_names,
-            "Total_Abs_Contribution": total_contribution
-        }).sort_values("Total_Abs_Contribution", ascending=False)
+    contrib_df = pd.DataFrame({
+        "Feature": feature_names,
+        "Total_Abs_Contribution": total_contribution
+    }).sort_values("Total_Abs_Contribution", ascending=False)
 
-        # Plot contribution
-        plt.figure(figsize=(12, 6))
-        sns.barplot(data=contrib_df, x="Feature", y="Total_Abs_Contribution", palette="viridis")
-        plt.title("Total Contribution to PCA by Original Feature")
-        plt.xlabel("Feature")
-        plt.ylabel("Total Abs Contribution")
-        plt.xticks(rotation=60, ha="right")
-        plt.tight_layout()
-        plt.show()
+    # Plot contribution
+    plt.figure(figsize=(12, 6))
+    sns.barplot(data=contrib_df, x="Feature", y="Total_Abs_Contribution", palette="viridis")
+    plt.title("Total Contribution to PCA by Original Feature")
+    plt.xlabel("Feature")
+    plt.ylabel("Total Abs Contribution")
+    plt.xticks(rotation=60, ha="right")
+    plt.tight_layout()
+    plt.show()
 
 def evaluate_random_forest(
     X_train: np.ndarray,
