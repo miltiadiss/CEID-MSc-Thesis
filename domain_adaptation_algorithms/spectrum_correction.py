@@ -2,6 +2,7 @@ import os
 import numpy as np
 import librosa
 import soundfile as sf
+import matplotlib.pyplot as plt
 
 class SpectrumCorrection:
     """Applies spectrum correction based on average STFT spectra from aligned segments.
@@ -80,3 +81,49 @@ class SpectrumCorrection:
         if return_stft:
             return stft
         return librosa.istft(stft, hop_length=self._hop_length, length=len(recording))
+
+    def plot_correction_coefficients(self, device_files, reference_device, k=4, sr=4000, save_dir=None):
+        """
+        Plot correction ratios (reference / device spectrum) for the first `k` wav files per device.
+
+        Args:
+            device_files (dict): {device: list of (filename, audio)}.
+            reference_device (str): Name of reference device.
+            k (int): Number of files to plot per device.
+            sr (int): Sampling rate (used for x-axis in Hz).
+            save_dir (str, optional): If given, saves plots to this directory.
+        """
+        # Find first valid reference spectrum
+        ref_spec = None
+        for _, audio in device_files.get(reference_device, []):
+            if not np.isnan(audio).any():
+                ref_spec = self._spectrum(audio)
+                break
+        if ref_spec is None:
+            raise ValueError("No valid reference spectrum found.")
+
+        for device, file_list in device_files.items():
+            for i, (fname, audio) in enumerate(file_list[:k]):
+                if np.isnan(audio).any():
+                    continue
+
+                spec = self._spectrum(audio)
+                ratio = ref_spec / (spec + 1e-6)
+                freqs = np.linspace(0, sr / 2, len(ratio))
+
+                plt.figure(figsize=(10, 5))
+                plt.plot(freqs, np.ones_like(ratio), label="Reference", linewidth=2)
+                plt.plot(freqs, ratio, label=f"{device} | {fname}", linewidth=2)
+                plt.title(f"Correction Coefficients - {device} | File {i+1}")
+                plt.xlabel("Frequency (Hz)")
+                plt.ylabel("Correction Coefficient")
+                plt.grid(True)
+                plt.legend()
+
+                if save_dir:
+                    os.makedirs(save_dir, exist_ok=True)
+                    out_path = os.path.join(save_dir, f"{device}_{i}_correction.png")
+                    plt.savefig(out_path)
+                    plt.close()
+                else:
+                    plt.show()
