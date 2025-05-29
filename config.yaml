@@ -7,6 +7,9 @@ audio_processing:
   f_hi: 2000
   target_duration: 8.0
 
+domain_adaptation:
+  L: 0.01
+
 paths:
   data_folder: "RSDB"
   audio_folder: "RSDB/audio_and_txt_files"
@@ -14,6 +17,6 @@ paths:
   raw_cycle_folder: "out/raw_cycles"
   aug_cycle_folder: "out/aug_cycles"
   cleaned_cycle_folder: "out/cleaned_audio_cycles"
-  final_csv: "out/final_dataset.csv"
-  plot_folder: "out/corrected_spectrograms"
-  corrected_audio_folder: "out/corrected_audio_files"
+  training_set_folder: "training_set"
+  test_set_folder: "test_set"
+
