@@ -9,129 +9,11 @@ import seaborn as sns
 from sklearn.feature_selection import f_classif, mutual_info_classif
 import librosa
 import librosa.display
-import scipy.signal
 from matplotlib.lines import Line2D
 from matplotlib.ticker import FuncFormatter
 import os
-from utils.audio_preprocessing_utils import classify
 
 # === Functions ===
-def plot_dataset_waveforms(audio_folder, k, sr):
-    """
-    Plots the first k waveforms with colored waveform segments based on respiratory cycle annotations.
-
-    Args:
-        audio_folder (str): Folder with .wav and .txt files.
-        k (int): Number of waveforms to plot.
-        sr (int): Sampling rate.
-    """
-
-    label_colors = {
-        "Normal": "#8ecae6",
-        "Crackle": "#fb8500",
-        "Wheeze": "#ff006e",
-        "Both": "#219ebc"
-    }
-
-    wav_files = sorted([f for f in os.listdir(audio_folder) if f.endswith(".wav")])[:k]
-
-    for fname in wav_files:
-        wav_path = os.path.join(audio_folder, fname)
-        txt_path = wav_path.replace(".wav", ".txt")
-        if not os.path.exists(txt_path):
-            continue
-
-        y, _ = librosa.load(wav_path, sr=sr)
-        t = np.arange(len(y)) / sr
-        annotations = np.loadtxt(txt_path)  # start, end, crackle, wheeze
-
-        plt.figure(figsize=(12, 3))
-        plt.title(f"{fname}")
-        plt.xlabel("Time (s)")
-        plt.ylabel("Amplitude")
-
-        for row in annotations:
-            start, end, crackle, wheeze = row
-            label = classify(int(crackle), int(wheeze))
-            color = label_colors[label]
-
-            start_sample = int(start * sr)
-            end_sample = int(end * sr)
-
-            # Plot waveform segment with different color for each class
-            t_seg = t[start_sample:end_sample]
-            y_seg = y[start_sample:end_sample]
-            plt.plot(t_seg, y_seg, color=color, linewidth=1.2)
-
-            plt.axvline(start, color="black", linestyle="--", linewidth=0.8)
-            plt.axvline(end, color="black", linestyle="--", linewidth=0.8)
-
-        handles = [plt.Line2D([0], [0], color=c, lw=3) for c in label_colors.values()]
-        plt.legend(handles, label_colors.keys(), loc="upper right")
-        plt.tight_layout()
-        plt.show()
-
-def plot_vtlp_effects(augmented_df, raw_folder, aug_folder, k=3, sr=4000, n_fft=256, hop_length=64, n_mels=64):
-    """
-    For each of the first k augmented samples:
-    - Shows original & VTLP log-mel spectrograms side-by-side
-    - Plots PSD curves underneath
-
-    Args:
-        augmented_df (pd.DataFrame): DataFrame with VTLP-augmented file info.
-        raw_folder (str): Path to original wav files.
-        aug_folder (str): Path to VTLP-augmented wav files.
-        k (int): Number of samples to visualize.
-        sr (int): Sampling rate.
-        n_fft (int): FFT size for STFT and PSD.
-        hop_length (int): Hop size for spectrogram.
-        n_mels (int): Number of mel bands.
-    """
-
-    for i in range(min(k, len(augmented_df))):
-        aug_row = augmented_df.iloc[i]
-        aug_fname = aug_row["file"]
-        orig_fname = aug_fname.replace("AUG_", "").split("_vtlp")[0] + ".wav"
-
-        path_orig = os.path.join(raw_folder, orig_fname)
-        path_aug = os.path.join(aug_folder, aug_fname)
-
-        y_orig, _ = librosa.load(path_orig, sr=sr)
-        y_aug, _ = librosa.load(path_aug, sr=sr)
-
-        # Compute Log-Mel Spectrograms 
-        S_orig = librosa.feature.melspectrogram(y=y_orig, sr=sr, n_fft=n_fft, hop_length=hop_length, n_mels=n_mels)
-        S_aug = librosa.feature.melspectrogram(y=y_aug, sr=sr, n_fft=n_fft, hop_length=hop_length, n_mels=n_mels)
-
-        log_S_orig = librosa.power_to_db(S_orig, ref=np.max)
-        log_S_aug = librosa.power_to_db(S_aug, ref=np.max)
-
-        # Compute PSD 
-        f1, Pxx_orig = scipy.signal.welch(y_orig, fs=sr, nperseg=n_fft)
-        f2, Pxx_aug = scipy.signal.welch(y_aug, fs=sr, nperseg=n_fft)
-
-        fig, axes = plt.subplots(2, 2, figsize=(14, 8), gridspec_kw={'height_ratios': [2, 1]})
-
-        # Spectrograms 
-        librosa.display.specshow(log_S_orig, sr=sr, hop_length=hop_length, x_axis='time', y_axis='mel', ax=axes[0][0])
-        axes[0][0].set_title(f"Original: {orig_fname}")
-
-        librosa.display.specshow(log_S_aug, sr=sr, hop_length=hop_length, x_axis='time', y_axis='mel', ax=axes[0][1])
-        axes[0][1].set_title(f"Augmented: {aug_fname}")
-
-        # PSD comparison 
-        axes[1][0].semilogy(f1, Pxx_orig, label="Original", linewidth=2)
-        axes[1][0].semilogy(f2, Pxx_aug, label="VTLP", linewidth=2)
-        axes[1][0].set_title("Power Spectrum")
-        axes[1][0].set_xlabel("Frequency (Hz)")
-        axes[1][0].set_ylabel("Power")
-        axes[1][0].legend()
-        axes[1][1].axis('off')  
-
-        plt.suptitle(f"VTLP Effect Visualization - Sample {i+1} of Training set", fontsize=14)
-        plt.tight_layout(rect=[0, 0, 1, 0.95])
-        plt.show()
-
 def plot_feature_diagnostics(
     features: np.ndarray,
     labels: np.ndarray,
@@ -382,8 +264,7 @@ def perform_pca_and_tsne(
     tsne_components: int,
     perplexity: int,
     n_features: int,
-    feature_names: list = None,
-    plot_feature_contribution = True
+    feature_names: list = None
 ) -> None:
     """
     Apply PCA and t-SNE on the given feature matrix and visualize the results.
@@ -451,31 +332,30 @@ def perform_pca_and_tsne(
     plt.show()
 
     # PCA Feature Contribution Aggregation 
-    if(plot_feature_contribution==True):
-        total_dims = X.shape[1]
-        assert total_dims % n_features == 0, "Feature dimensions not divisible by n_features"
-        n_frames = total_dims // n_features
+    total_dims = X.shape[1]
+    assert total_dims % n_features == 0, "Feature dimensions not divisible by n_features"
+    n_frames = total_dims // n_features
 
-        loadings = pca.components_.T * np.sqrt(pca.explained_variance_)  # shape: (frames × features, components)
-        total_contribution = np.zeros(n_features)
-        for feat_idx in range(n_features):
-            indices = [f * n_features + feat_idx for f in range(n_frames)]
-            total_contribution[feat_idx] = np.sum(np.abs(loadings[indices, :]))
+    loadings = pca.components_.T * np.sqrt(pca.explained_variance_)  # shape: (frames × features, components)
+    total_contribution = np.zeros(n_features)
+    for feat_idx in range(n_features):
+        indices = [f * n_features + feat_idx for f in range(n_frames)]
+        total_contribution[feat_idx] = np.sum(np.abs(loadings[indices, :]))
 
-        contrib_df = pd.DataFrame({
-            "Feature": feature_names,
-            "Total_Abs_Contribution": total_contribution
-        }).sort_values("Total_Abs_Contribution", ascending=False)
+    contrib_df = pd.DataFrame({
+        "Feature": feature_names,
+        "Total_Abs_Contribution": total_contribution
+    }).sort_values("Total_Abs_Contribution", ascending=False)
 
-        # Plot contribution
-        plt.figure(figsize=(12, 6))
-        sns.barplot(data=contrib_df, x="Feature", y="Total_Abs_Contribution", palette="viridis")
-        plt.title("Total Contribution to PCA by Original Feature")
-        plt.xlabel("Feature")
-        plt.ylabel("Total Abs Contribution")
-        plt.xticks(rotation=60, ha="right")
-        plt.tight_layout()
-        plt.show()
+    # Plot contribution
+    plt.figure(figsize=(12, 6))
+    sns.barplot(data=contrib_df, x="Feature", y="Total_Abs_Contribution", palette="viridis")
+    plt.title("Total Contribution to PCA by Original Feature")
+    plt.xlabel("Feature")
+    plt.ylabel("Total Abs Contribution")
+    plt.xticks(rotation=60, ha="right")
+    plt.tight_layout()
+    plt.show()
 
 def evaluate_random_forest(
     X_train: np.ndarray,

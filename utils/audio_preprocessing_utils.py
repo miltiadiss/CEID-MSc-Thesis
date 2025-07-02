@@ -1,6 +1,11 @@
+import os
 import numpy as np
+import pandas as pd
 import librosa
-from scipy.signal import butter, filtfilt
+import soundfile as sf
+from tqdm import tqdm
+from scipy.signal import butter, filtfilt, correlate
+import scipy.stats
 from typing import Tuple
 
 # === Functions ===
@@ -57,6 +62,82 @@ def fix_cycle_length(y: np.ndarray, sr: int, target_duration: float) -> np.ndarr
         y = y[:target_length]
     return y
 
+def extract_acoustic_features(
+    y: np.ndarray,
+    sr: int,
+    frame_size: int,
+    hop_size: int,
+    n_mfcc: int,
+    n_mels: int,
+) -> np.ndarray:
+    """Extract acoustic features (MFCC, GFCC, temporal, spectral and Log-Mel statistical features).
+
+    Args:
+        y (np.ndarray): Input audio signal.
+        sr (int): Sampling rate.
+        frame_size (int): Number of samples per frame.
+        hop_size (int): Number of samples per hop.
+        n_mfcc (int): Number of MFCC coefficients.
+        n_mels (int): Number of Mel filters.
+
+    Returns:
+        np.ndarray: 1D feature vector.
+    """
+
+    # MFCCs
+    mfccs = librosa.feature.mfcc(
+        y=y, sr=sr, n_mfcc=n_mfcc, n_fft=frame_size,
+        hop_length=hop_size, window='hann'
+    )
+
+    # Spectral features
+    spectral_centroid = librosa.feature.spectral_centroid(y=y, sr=sr, n_fft=frame_size, hop_length=hop_size)
+    spectral_bandwidth = librosa.feature.spectral_bandwidth(y=y, sr=sr, n_fft=frame_size, hop_length=hop_size)
+    spectral_rolloff = librosa.feature.spectral_rolloff(y=y, sr=sr, n_fft=frame_size, hop_length=hop_size)
+    spectral_flatness = librosa.feature.spectral_flatness(y=y, n_fft=frame_size, hop_length=hop_size)
+
+    # Temporal features
+    rms = librosa.feature.rms(y=y, frame_length=frame_size, hop_length=hop_size)
+    zero_crossing_rate = librosa.feature.zero_crossing_rate(y=y, frame_length=frame_size, hop_length=hop_size)
+
+    # Spectral flux (from centroid)
+    spectral_flux = np.diff(spectral_centroid, axis=1)
+    spectral_flux = np.hstack([spectral_flux, spectral_flux[:, -1:]])
+
+    # Log-mel spectrogram
+    mel_spectrogram = librosa.feature.melspectrogram(y=y, sr=sr, n_fft=frame_size, hop_length=hop_size,
+                                                      n_mels=n_mels, window='hann')
+    log_mel = librosa.power_to_db(mel_spectrogram, ref=np.max)
+
+    log_mel_mean = np.mean(log_mel, axis=1)
+    log_mel_std = np.std(log_mel, axis=1)
+    log_mel_skewness = scipy.stats.skew(log_mel, axis=1, bias=False)
+    log_mel_kurtosis = scipy.stats.kurtosis(log_mel, axis=1, bias=False)
+
+    # Autocorrelation peak
+    autocorr = correlate(y, y, mode='full')
+    autocorr = autocorr[autocorr.size // 2:]  # Keep only positive lags
+    autocorr_peak = np.max(autocorr[1:])  # exclude zero-lag
+
+    # Temporal entropy (based on RMS energy)
+    rms_energy = rms[0] / (np.sum(rms[0]) + 1e-8)
+    temporal_entropy = -np.sum(rms_energy * np.log2(rms_energy + 1e-8))
+
+    # Final feature vector
+    feature_vector = np.hstack([
+        np.mean(mfccs, axis=1),
+        np.mean(spectral_centroid), np.mean(spectral_bandwidth),
+        np.mean(zero_crossing_rate), np.mean(rms),
+        np.mean(spectral_rolloff), np.mean(spectral_flux),
+        np.mean(spectral_flatness),
+        np.mean(log_mel_mean), np.mean(log_mel_std),
+        np.mean(log_mel_skewness), np.mean(log_mel_kurtosis),
+        autocorr_peak,
+        temporal_entropy
+    ])
+
+    return feature_vector
+
 def apply_vtlp(
     y: np.ndarray,
     sr: int,
@@ -103,74 +184,6 @@ def apply_vtlp(
     power_mel = librosa.db_to_power(warped_log_mel)
     y_warped = librosa.feature.inverse.mel_to_audio(power_mel, sr=sr, n_fft=frame_size, hop_length=hop_size)
     return y_warped
-
-def extract_acoustic_features(
-    y: np.ndarray,
-    sr: int,
-    frame_size: int,
-    hop_size: int,
-    n_mfcc: int,
-    n_mels: int,
-) -> np.ndarray:
-    """Extract frame-level acoustic features for every audio cycle (MFCC, temporal, spectral and Log-Mel statistical features).
-
-    Args:
-        y (np.ndarray): Input audio signal.
-        sr (int): Sampling rate.
-        frame_size (int): Number of samples per frame.
-        hop_size (int): Number of samples per hop.
-        n_mfcc (int): Number of MFCC coefficients.
-        n_mels (int): Number of Mel filters.
-
-    Returns:
-        np.ndarray: 2D feature matrix [frames, features].
-    """
-
-    # MFCCs
-    mfccs = librosa.feature.mfcc(
-        y=y, sr=sr, n_mfcc=n_mfcc, n_fft=frame_size,
-        hop_length=hop_size, window='hann'
-    )
-
-    # Spectral features
-    spectral_centroid = librosa.feature.spectral_centroid(y=y, sr=sr, n_fft=frame_size, hop_length=hop_size)
-    spectral_bandwidth = librosa.feature.spectral_bandwidth(y=y, sr=sr, n_fft=frame_size, hop_length=hop_size)
-    spectral_rolloff = librosa.feature.spectral_rolloff(y=y, sr=sr, n_fft=frame_size, hop_length=hop_size)
-    spectral_flatness = librosa.feature.spectral_flatness(y=y, n_fft=frame_size, hop_length=hop_size)
-
-    # Temporal features
-    rms = librosa.feature.rms(y=y, frame_length=frame_size, hop_length=hop_size)
-    zero_crossing_rate = librosa.feature.zero_crossing_rate(y=y, frame_length=frame_size, hop_length=hop_size)
-
-    # Spectral flux
-    spectral_flux = np.diff(spectral_centroid, axis=1)
-    spectral_flux = np.hstack([spectral_flux, spectral_flux[:, -1:]])
-
-    # Log-mel spectrogram
-    mel_spectrogram = librosa.feature.melspectrogram(
-        y=y, sr=sr, n_fft=frame_size, hop_length=hop_size,
-        n_mels=n_mels, window='hann'
-    )
-    log_mel = librosa.power_to_db(mel_spectrogram, ref=np.max)
-
-    # On-set envelope
-    onset_env = librosa.onset.onset_strength(y=y, sr=sr, hop_length=hop_size)[np.newaxis, :]
-
-    # Frame-level concatenation of features
-    features = np.vstack([
-        mfccs,                        # (n_mfcc, frames)
-        spectral_centroid,            # (1, frames)
-        spectral_bandwidth,           # (1, frames)
-        spectral_rolloff,             # (1, frames)
-        spectral_flatness,            # (1, frames)
-        rms,                          # (1, frames)
-        zero_crossing_rate,           # (1, frames)
-        spectral_flux,                # (1, frames)
-        log_mel,                      # (n_mel, frames)
-        onset_env                     # (1, frames)
-    ])  
-
-    return features.T  # return array of shape (frames, features)  for each cycle
 
 def classify(crackle: int, wheeze: int) -> str:
     """Assign a class label based on crackle and wheeze presence.

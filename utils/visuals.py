@@ -14,6 +14,8 @@ from matplotlib.lines import Line2D
 from matplotlib.ticker import FuncFormatter
 import os
 from utils.audio_preprocessing_utils import classify
+from collections import defaultdict
+from typing import Dict
 
 # === Functions ===
 def plot_dataset_waveforms(audio_folder, k, sr):
@@ -70,6 +72,38 @@ def plot_dataset_waveforms(audio_folder, k, sr):
         plt.legend(handles, label_colors.keys(), loc="upper right")
         plt.tight_layout()
         plt.show()
+
+def plot_cycle_duration_distribution(annotation_folder: str) -> None:
+    """
+    Plots the histogram of respiratory cycle durations using annotation files.
+
+    Args:
+        annotation_folder (str): Path to the folder containing .txt annotation files.
+
+    Returns:
+        None
+    """
+    # Collect durations from annotation files
+    cycle_durations = []
+
+    for file in os.listdir(annotation_folder):
+        if file.endswith(".txt"):
+            txt_path = os.path.join(annotation_folder, file)
+            annotations = np.loadtxt(txt_path)
+
+            for (start, end, crackle, wheeze) in annotations:
+                duration = end - start
+                if duration > 0:
+                    cycle_durations.append(duration)
+
+    # Plot histogram
+    plt.figure(figsize=(8, 5))
+    plt.hist(cycle_durations, bins=50, color='steelblue', edgecolor='black')
+    plt.title("Distribution of Respiratory Cycle Lengths")
+    plt.xlabel("Time (s)")
+    plt.ylabel("Frequency")
+    plt.tight_layout()
+    plt.show()
 
 def plot_vtlp_effects(augmented_df, raw_folder, aug_folder, k=3, sr=4000, n_fft=256, hop_length=64, n_mels=64):
     """
@@ -131,6 +165,76 @@ def plot_vtlp_effects(augmented_df, raw_folder, aug_folder, k=3, sr=4000, n_fft=
         plt.suptitle(f"VTLP Effect Visualization - Sample {i+1} of Training set", fontsize=14)
         plt.tight_layout(rect=[0, 0, 1, 0.95])
         plt.show()
+
+def plot_average_spectrum_per_class(
+    train_df: pd.DataFrame,
+    raw_cycle_folder: str,
+    sampling_rate: int,
+    frame_size: int,
+    hop_size: int
+) -> None:
+    """Plots the average power spectrum per class and highlights the region
+    with the highest spectral energy.
+
+    Args:
+        train_df (pd.DataFrame): DataFrame containing file names and class labels.
+        raw_cycle_folder (str): Path to folder containing the cycle .wav files.
+        sampling_rate (int): Sampling rate of the audio signals.
+        frame_size (int): STFT window size (n_fft).
+        hop_size (int): Hop length for STFT.
+
+    Returns:
+        None
+    """
+    spectra_per_class: Dict[str, list] = defaultdict(list)
+
+    # Define fixed colors per class
+    label_colors = {
+        "Normal": "#8ecae6",
+        "Crackle": "#fb8500",
+        "Wheeze": "#ff006e",
+        "Both": "#219ebc"
+    }
+
+    # Compute power spectrum for each file and group by class
+    for _, row in train_df.iterrows():
+        file_path = os.path.join(raw_cycle_folder, row["file"])
+        y, sr = librosa.load(file_path, sr=sampling_rate)
+
+        S = np.abs(librosa.stft(y, n_fft=frame_size, hop_length=hop_size)) ** 2
+        psd = np.mean(S, axis=1)  # average power spectrum
+        spectra_per_class[row["class"]].append(psd)
+
+    # Frequency bins
+    freqs = librosa.fft_frequencies(sr=sampling_rate, n_fft=frame_size)
+
+    # Compute mean PSD across all classes to find peak region
+    all_psd = np.concatenate(list(spectra_per_class.values()), axis=0)
+    mean_total_psd = np.mean(all_psd, axis=0)
+
+    # Identify region with top 5% power values
+    threshold = np.percentile(mean_total_psd, 95)
+    mask = mean_total_psd >= threshold
+    highlight_start = freqs[np.where(mask)[0][0]]
+    highlight_end = freqs[np.where(mask)[0][-1]]
+
+    # Plot spectra
+    plt.figure(figsize=(10, 6))
+    for cls, psd_list in spectra_per_class.items():
+        avg_psd = np.mean(psd_list, axis=0)
+        plt.plot(freqs, avg_psd, label=cls, color=label_colors.get(cls, None))
+
+    # Highlight high-power region
+    plt.axvspan(highlight_start, highlight_end, color='orange', alpha=0.3,
+                label=f"Top 5% Power Region ({int(highlight_start)}–{int(highlight_end)} Hz)")
+
+    plt.xlabel("Frequency (Hz)")
+    plt.ylabel("Mean Power Spectrum")
+    plt.title("Average Frequency Spectrum per Class")
+    plt.legend()
+    plt.yscale("log")
+    plt.tight_layout()
+    plt.show()
 
 def plot_feature_diagnostics(
     features: np.ndarray,
