@@ -2,5 +2,5 @@
 
 **Pipeline of the applied methodology**
 <p align="center">
-  <img width="750" height="390" alt="pipeline" src="https://github.com/user-attachments/assets/e1d4f802-7f0a-431a-9ad3-6e538346682e" />
+  <img width="859" height="442" alt="pipeline (2)" src="https://github.com/user-attachments/assets/0885baa4-e676-4e37-8417-87a2acdb02bc" />
 </p>
