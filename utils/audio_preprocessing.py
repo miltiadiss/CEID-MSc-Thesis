@@ -31,12 +31,12 @@ def preprocess_audio(audio_path: str, sr: int, cutoff: float = 50.0) -> Tuple[np
         cutoff (float): High-pass filter cutoff frequency.
 
     Returns:
-        tuple: Processed audio signal (np.array), sampling rate (int).
+        tuple: Filtered audio signal (np.array), final preprocessed audio signal (np.array), sampling rate (int).
     """
     y, sr = librosa.load(audio_path, sr=sr)
-    y = highpass_filter(y, cutoff, sr, order=5)
-    y = librosa.util.normalize(y)
-    return y, sr
+    y_filtered = highpass_filter(y, cutoff, sr, order=5)
+    y_preprocessed = librosa.util.normalize(y_filtered)
+    return y_filtered, y_preprocessed, sr
 
 def fix_cycle_length(y: np.ndarray, sr: int, target_duration: float) -> np.ndarray:
     """Pad or truncate signal to fixed length.
