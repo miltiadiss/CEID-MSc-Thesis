@@ -20,6 +20,11 @@ dist/
 Thumbs.db
 .DS_Store
 
+# Pycache
+__pycache__/
+*.py[cod]
+*$py.class
+
 # Dataset folders
 RSDB/
 
@@ -33,3 +38,6 @@ corrected_audio_dcse/
 
 # csv files
 *.csv
+
+# txt files
+*.txt
