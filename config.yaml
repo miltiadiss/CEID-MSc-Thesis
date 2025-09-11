@@ -3,20 +3,24 @@ audio_processing:
   frame_length: 0.06
   hop_length: 0.03
   n_mfcc: 13
-  n_mels: 64
+  n_mels: 20
   f_hi: 2000
-  target_duration: 8.0
+  target_duration: 3.0
 
 domain_adaptation:
-  L: 0.01
+  bottleneck_dim: 256
+  latent_dim: 16
+  batch_size: 2000
 
 paths:
   data_folder: "RSDB"
   audio_folder: "RSDB/audio_and_txt_files"
-  output_folder: "out"
-  raw_cycle_folder: "out/raw_cycles"
-  aug_cycle_folder: "out/aug_cycles"
-  cleaned_cycle_folder: "out/cleaned_audio_cycles"
+  output_folder: "cycles"
+  raw_cycle_folder: "cycles/raw_cycles"
+  raw_cycle_folder_original: "cycles/original_raw_cycles"
+  aug_cycle_folder: "cycles/aug_cycles"
+  filtered_cycle_folder: "cycles/filtered_cycles"
+  cleaned_cycle_folder: "cycles/cleaned_audio_cycles"
   training_set_folder: "training_set"
   test_set_folder: "test_set"
 
