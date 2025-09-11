@@ -1037,38 +1037,6 @@ def plot_dataset_spectrograms(audio_folder, k, sr, hop_length):
         plt.tight_layout()
         plt.show()
 
-def plot_cycle_duration_distribution(annotation_folder: str) -> None:
-    """
-    Plots the histogram of respiratory cycle durations using annotation files.
-
-    Args:
-        annotation_folder (str): Path to the folder containing .txt annotation files.
-
-    Returns:
-        None
-    """
-    # Collect durations from annotation files
-    cycle_durations = []
-
-    for file in os.listdir(annotation_folder):
-        if file.endswith(".txt"):
-            txt_path = os.path.join(annotation_folder, file)
-            annotations = np.loadtxt(txt_path)
-
-            for (start, end, crackle, wheeze) in annotations:
-                duration = end - start
-                if duration > 0:
-                    cycle_durations.append(duration)
-
-    # Plot histogram
-    plt.figure(figsize=(8, 5))
-    plt.hist(cycle_durations, bins=50, color='steelblue', edgecolor='black')
-    plt.title("Distribution of Respiratory Cycle Lengths")
-    plt.xlabel("Time (s)")
-    plt.ylabel("Frequency")
-    plt.tight_layout()
-    plt.show()
-
 def plot_average_spectrum_per_class(
     train_df: pd.DataFrame,
     raw_cycle_folder: str,
