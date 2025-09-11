@@ -1,3 +1,3 @@
 # Classification of Abnormal Respiratory Sounds using Machine Learning and Domain Adaptation 🩺
 
-<img width="850" height="443" alt="pipeline" src="https://github.com/user-attachments/assets/b534f4c7-9eec-414e-b69d-27bbf41ee4cd" />
+<img width="500" height="260" alt="pipeline" src="https://github.com/user-attachments/assets/6502a89b-ff3d-44d1-8253-a2d7218c18e8" />
