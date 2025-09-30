@@ -154,16 +154,10 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 ## Implementation
 
 - **Languages / Tools**: Primarily Python, Jupyter Notebooks  
-- **Key Modules / Packages**: `domain_adaptation_algorithms/`, `modules/`, `statistical_models/`, `utils/`  
+- **Key Modules / Packages**: adaptation modules inside `domain_adaptation_algorithms/`, pipeline modules in `modules/`, baseline and statistical models in `statistical_models/`, helper functions in `utils/` 
 - **Configuration**: `config.yaml` holds settings (paths, hyperparameters, domain adaptation choices)  
-- **Notebook**: `RSDB_analysis.ipynb` for exploratory analysis of the database 
-- **Visualization / results**: stored under `Documentation/` folder  
-
-Μain scripts:
-
-- adaptation modules inside `domain_adaptation_algorithms/`  
-- helper functions in `utils/`  
-- baseline and statistical models in `statistical_models/`  
+- **Database**: `RSDB_analysis.ipynb` for exploratory analysis of the database 
+- **Report and results**: stored under `Documentation/` folder    
 
 ---
 
