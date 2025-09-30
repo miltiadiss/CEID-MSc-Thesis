@@ -55,7 +55,7 @@ Key research questions include:
 The methodology pipeline comprises the following stages:
 
 1. **Preprocessing & dataset augmentation**  
-2. **Feature extraction**
+2. **Feature extraction & selection**
 3. **Supervised domain adaptation**
 4. **Classifier training**
 5. **Classifier valuation across different devices**
