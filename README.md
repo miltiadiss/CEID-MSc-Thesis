@@ -22,16 +22,16 @@
 
 ## Introduction
 
-This repository contains the implementation and artifacts of my MSc thesis on **“Supervised domain adaptation techniques for the classification of abnormal respiratory sounds.”** The thesis aims to address the common issue of **domain shift** between different recording devices of respiratory sounds and to develop models that generalize better to unseen devices. The goal is to improve the classification of pathological respiratory audio across domains by leveraging domain adaptation methods.
+This repository contains the implementation and artifacts of my MSc thesis on **“Supervised domain adaptation techniques for the classification of abnormal respiratory sounds.”** The thesis aims to address the common issue of **domain shift** between different recording devices of respiratory sounds and to develop models that generalize better to unseen devices. The goal is to improve the classification of pathological respiratory audio across domains by leveraging sypervised domain adaptation methods.
 
 ---
 
 ## Motivation & Background
 
 - Respiratory sound classification is a growing field in medical signal processing and can aid in non-invasive diagnosis of lung disorders.  
-- However, models trained on one dataset often perform poorly when tested on another due to differences in recording conditions, sensor types, subject populations, etc.  
-- **Domain adaptation** methods aim to reduce this gap by aligning feature distributions across source and target domains.  
-- This work explores supervised domain adaptation (i.e. when some labeled data in target domain is available) to improve cross-domain classification of abnormal respiratory sounds.
+- However, models trained on recordings coming from primarily one specific device often perform poorly when tested on another due to differences in recording conditions, sensor types, subject populations, etc.  
+- **Domain adaptation** methods aim to reduce this gap by aligning feature distributions across source and target domains (devices).  
+- This work explores supervised domain adaptation to improve cross-domain classification of abnormal respiratory sounds.
 
 ---
 
@@ -40,13 +40,13 @@ This repository contains the implementation and artifacts of my MSc thesis on **
 - Investigate supervised domain adaptation algorithms applicable to audio classification  
 - Apply these techniques to respiratory sound datasets  
 - Compare baseline models vs domain-adapted models across domain shifts  
-- Analyze strengths, limitations, and generalization potential  
+- Analyze strengths, limitations and generalization potential  
 
 Key research questions include:
 
 - Which domain adaptation methods yield improved classification performance in cross-domain respiratory sound tasks?  
 - How robust are the models when domain discrepancies are large?  
-- What are the trade-offs (e.g., complexity, convergence) among different adaptation approaches?
+- What are the trade-offs among different adaptation approaches?
 
 ---
 
@@ -63,7 +63,7 @@ The methodology pipeline comprises the following stages:
 Below is a simplified architecture diagram:
 
 <p align="center">
-  <img width="859" height="442" alt="pipeline (2)" src="https://github.com/user-attachments/assets/0885baa4-e676-4e37-8417-87a2acdb02bc" />
+  <img width="659" height="342" alt="pipeline (2)" src="https://github.com/user-attachments/assets/0885baa4-e676-4e37-8417-87a2acdb02bc" />
 </p>
 
 In essence, the model learns embeddings where source and target distributions are aligned, while maintaining class-discriminative power.
