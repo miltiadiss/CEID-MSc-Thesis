@@ -1,7 +1,9 @@
 ## Supervised domain adaptation techniques for the classification of abnormal respiratory sounds 🩺
 *Master of Science Thesis — CEID, University of Patras*
 
-<img width="491" height="192" alt="image" src="https://github.com/user-attachments/assets/fbcc3575-82c4-4e2d-9844-b0f986a6d7d9" />
+<p align="center">
+  <img width="491" height="192" alt="image" src="https://github.com/user-attachments/assets/fbcc3575-82c4-4e2d-9844-b0f986a6d7d9" />
+</p>
 
 ---
 
@@ -21,7 +23,7 @@
 
 ## Introduction
 
-This repository contains the implementation and artifacts of my MSc thesis on **“Supervised domain adaptation techniques for the classification of abnormal respiratory sounds.”** The thesis aims to address the common issue of **domain shift** between different recording devices of respiratory sounds and to develop models that generalize better to unseen devices. The goal is to improve the classification of pathological respiratory audio across domains by leveraging supervised domain adaptation methods.
+This repository contains the implementation and artifacts of my MSc thesis on **“Supervised domain adaptation techniques for the classification of abnormal respiratory sounds.”** The thesis aims to address the common issue of **domain shift** between different recording devices of respiratory sounds and to develop models that generalize better to unseen devices. The goal is to improve the classification of pathological respiratory sounds (**crackles, wheezes**) across domains by leveraging supervised domain adaptation methods.
 
 ---
 
