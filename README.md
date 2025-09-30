@@ -114,12 +114,19 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 | Crackle | 0.71 | 0.89 | 0.72 | 0.61 |
 | Wheeze | 0.65 | 0.96 | 0.68 | 0.80 |
 
-> **Feature distribution across different classes and devices after the implementation of CDAN:**
+> **Feature distribution across different classes and devices before and after the implementation of CDAN:**
+
+<img width="367" height="329" alt="image" src="https://github.com/user-attachments/assets/05aca22a-e69e-4322-91a5-2ccab025a418" />
+<img width="367" height="329" alt="image" src="https://github.com/user-attachments/assets/193a55c8-b829-4712-b6af-5576d3d7d704" />
 
 <img width="367" height="329" alt="image" src="https://github.com/user-attachments/assets/355fc441-d491-44ce-9d50-81bd74e1df21" />
 <img width="367" height="329" alt="image" src="https://github.com/user-attachments/assets/a793ac2a-6017-47d5-8160-a29d6f0c294e" />
 
-> **Confusion matrix, ROC curve, Precision-Recall curve after the implementation of Non-Linear SVM on the adapted features:**
+> **Confusion matrix, ROC curve, Precision-Recall curve of Non-Linear SVM before and after the implementation of CDAN:**
+
+<img width="234" height="187" alt="image" src="https://github.com/user-attachments/assets/31155006-360d-4736-9288-a9de9bdfee9a" />
+<img width="274" height="187" alt="image" src="https://github.com/user-attachments/assets/57b5858d-2613-4c9f-af3f-51d4c31eecb1" />
+<img width="274" height="187" alt="image" src="https://github.com/user-attachments/assets/cb36dd9e-ea6e-4f6d-8be1-6d99873f9ba7" />
 
 <img width="234" height="187" alt="image" src="https://github.com/user-attachments/assets/c7c4c7c5-e809-4388-83ef-c5faaf877ec2" />
 <img width="274" height="187" alt="image" src="https://github.com/user-attachments/assets/7a006364-87d8-44b6-b52a-7fd08aaecab0" />
