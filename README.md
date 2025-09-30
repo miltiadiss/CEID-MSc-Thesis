@@ -64,7 +64,7 @@ The methodology pipeline comprises the following stages:
 Below is a simplified architecture diagram:
 
 <p align="center">
-  <img width="599" height="317" alt="pipeline (2)" src="https://github.com/user-attachments/assets/0885baa4-e676-4e37-8417-87a2acdb02bc" />
+  <img width="569" height="302" alt="pipeline (2)" src="https://github.com/user-attachments/assets/0885baa4-e676-4e37-8417-87a2acdb02bc" />
 </p>
 
 In essence, the domain adaptation models are based on **adversarial learning**, which forces them to learn embeddings where the different device distributions are aligned, while maintaining class-discriminative power. Various adversarial methods were implemented and compared, including:
