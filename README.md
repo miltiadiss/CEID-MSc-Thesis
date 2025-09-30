@@ -56,9 +56,9 @@ The methodology pipeline comprises the following stages:
 
 1. **Preprocessing & dataset augmentation**  
 2. **Feature extraction**
-3. **Baseline classifier training**
-4. **Supervised domain adaptation**  
-5. **Evaluation across different devices**
+3. **Supervised domain adaptation**
+4. **Classifier training**
+5. **Classifier valuation across different devices**
 
 Below is a simplified architecture diagram:
 
