@@ -134,6 +134,30 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 
 ---
 
+## Repository structure
+
+/
+├── README.md  
+├── config.yaml  
+├── RSDB_analysis.ipynb  
+├── .gitignore  
+├── domain_adaptation_algorithms/  
+│   ├── dann.py  
+│   ├── cdan.py  
+│   └── davae.py  
+├── modules/  
+│   ├── preprocessing.ipynb     
+│   ├── feature_extraction.ipynb
+|   ├── domain_adaptation.ipynb
+│   └── classification.ipynb
+├── statistical_models/  
+│   └── baseline_models.py  
+├── utils/  
+│   └── helpers.py  
+└── Documentation/  
+    ├── pipeline.png  
+    └── other figures, tables  
+
 ## Usage Instructions
 
 To run the project:
@@ -157,29 +181,3 @@ python main.py --config config.yaml
 
 # Or launch Jupyter notebook
 jupyter notebook RSDB_analysis.ipynb
-
----
-
-## Repository structure
-
-/
-├── README.md  
-├── config.yaml  
-├── RSDB_analysis.ipynb  
-├── .gitignore  
-├── domain_adaptation_algorithms/  
-│   ├── method1.py  
-│   ├── method2.py  
-│   └── …  
-├── modules/  
-│   ├── feature_extractor.py  
-│   └── classifier.py  
-├── statistical_models/  
-│   └── baseline_models.py  
-├── utils/  
-│   └── helpers.py  
-└── Documentation/  
-    ├── pipeline.png  
-    └── other figures, tables  
-
-
