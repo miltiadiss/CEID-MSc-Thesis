@@ -95,17 +95,21 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 - Conducted experiments across **Respiratory Sound Database (RSDB)**: https://www.kaggle.com/datasets/vbookshelf/respiratory-sound-database 
 - Compared baseline classifiers (**k-NN, SVM, Random Forest, XGBoost**) performance before and after the implementation of supervised domain adaptation  
 - Metrics: **Accuracy, Weighted F1-score, Macro AUC** for **total evaluation** & **Confusion matrices, ROC curves, Precision-Recall curves, Sensitivity, Specificity, F1-Score, MCC** for **class-wise evaluation** 
-- Visualizations and comparative plots from the best method are shown below:
 
-**Feature distribution across the different classes and devices after the implementation of CDAN:**
+**Best classifier**: Non-Linear SVM with **C=10.0, γ='scale'**
+
+| Method | Accuracy | Macro AUC | Weighted F1-score |
+|--------|----------|----------|----------|
+| Baseline | 75.3 % | 0.68 | |
+| DANN | A → B | 0.75 | |
+| CDAN | A → B | 0.73 | |
+| DANN with VAE (joint training) | A → B | 0.73 | |
+| DANN with VAE (sequential training) | A → B | 0.73 | |
+
+**Best domain adaptation method**: CDAN with **λ=0.2**
+
 <img width="417" height="354" alt="image" src="https://github.com/user-attachments/assets/355fc441-d491-44ce-9d50-81bd74e1df21" />
 <img width="417" height="354" alt="image" src="https://github.com/user-attachments/assets/a793ac2a-6017-47d5-8160-a29d6f0c294e" />
-
-| Method | Source → Target | Accuracy | F1-score |
-|--------|------------------|----------|----------|
-| Baseline | Dataset A → B | 75.3 % | 0.68 |
-| DA Method 1 | A → B | **82.1 %** | 0.75 |
-| DA Method 2 | A → B | 80.4 % | 0.73 |
 
 ---
 
