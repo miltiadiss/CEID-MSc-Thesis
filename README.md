@@ -169,7 +169,7 @@ In essence, the domain adaptation models are based on **adversarial training** a
 
 ---
 
-## Usage Instructions & Deoendencies
+## Usage Instructions
 
 To run the project:
 
@@ -179,7 +179,8 @@ cd CEID-MSc-Thesis
 
 # (Optional) create virtual environment
 python3 -m venv venv
-source venv/bin/activate
+source venv/bin/activate   # Linux / macOS
+venv\Scripts\activate      # Windows PowerShell
 
 # Install dependencies
 pip install -r requirements.txt
@@ -191,31 +192,21 @@ pip install -r requirements.txt
 python main.py --config config.yaml
 
 # Or launch Jupyter notebook
-jupyter notebook RSDB_analysis.ipynb```
+jupyter notebook RSDB_analysis.ipynb
+```
 
----
+### Dependencies
 
-The project is implemented in **Python 3.8+** and requires the following packages:
+The project requires **Python 3.8+** and the following packages:
 
-- **Core libraries**:  
-  - numpy, pandas, scipy, pyyaml  
+- **Core libraries**: numpy, pandas, scipy, pyyaml  
+- **Machine Learning / Deep Learning**: scikit-learn, torch, torchvision, xgboost  
+- **Audio processing**: librosa  
+- **Visualization**: matplotlib, seaborn  
+- **Notebooks**: jupyter, notebook  
 
-- **Machine Learning / Deep Learning**:  
-  - scikit-learn  
-  - PyTorch (torch, torchvision)  
-  - xgboost  
-
-- **Audio processing**:  
-  - librosa  
-
-- **Visualization**:  
-  - matplotlib  
-  - seaborn  
-
-- **Notebooks**:  
-  - jupyter, notebook  
-
-You can install all dependencies via:
+Install all dependencies with:
 
 ```bash
 pip install -r requirements.txt
+```
