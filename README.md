@@ -64,7 +64,7 @@ The methodology pipeline comprises the following stages:
 Below is a simplified architecture diagram:
 
 <p align="center">
-  <img width="659" height="342" alt="pipeline (2)" src="https://github.com/user-attachments/assets/0885baa4-e676-4e37-8417-87a2acdb02bc" />
+  <img width="599" height="317" alt="pipeline (2)" src="https://github.com/user-attachments/assets/0885baa4-e676-4e37-8417-87a2acdb02bc" />
 </p>
 
 In essence, the domain adaptation models are based on **adversarial learning**, which forces them to learn embeddings where the different device distributions are aligned, while maintaining class-discriminative power. Various adversarial methods were implemented and compared, including:
@@ -114,12 +114,12 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 | Crackle | 0.71 | 0.89 | 0.72 | 0.61 |
 | Wheeze | 0.65 | 0.96 | 0.68 | 0.80 |
 
-**Feature distribution across different classes and devices after the implementation of CDAN:**
+> **Feature distribution across different classes and devices after the implementation of CDAN:**
 
 <img width="367" height="329" alt="image" src="https://github.com/user-attachments/assets/355fc441-d491-44ce-9d50-81bd74e1df21" />
 <img width="367" height="329" alt="image" src="https://github.com/user-attachments/assets/a793ac2a-6017-47d5-8160-a29d6f0c294e" />
 
-**Confusion matrix, ROC curve, Precision-Recall curve after the implementation of Non-Linear SVM on the adapted features:**
+> **Confusion matrix, ROC curve, Precision-Recall curve after the implementation of Non-Linear SVM on the adapted features:**
 
 <img width="234" height="187" alt="image" src="https://github.com/user-attachments/assets/c7c4c7c5-e809-4388-83ef-c5faaf877ec2" />
 <img width="274" height="187" alt="image" src="https://github.com/user-attachments/assets/7a006364-87d8-44b6-b52a-7fd08aaecab0" />
