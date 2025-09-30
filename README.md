@@ -191,7 +191,7 @@ pip install -r requirements.txt
 python main.py --config config.yaml
 
 # Or launch Jupyter notebook
-jupyter notebook RSDB_analysis.ipynb
+jupyter notebook RSDB_analysis.ipynb```
 
 ---
 
