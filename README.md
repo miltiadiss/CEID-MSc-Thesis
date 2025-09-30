@@ -128,3 +128,28 @@ python main.py --config config.yaml
 # Or launch Jupyter notebook
 jupyter notebook RSDB_analysis.ipynb
 
+---
+
+## Repository structure
+
+/
+├── README.md  
+├── config.yaml  
+├── RSDB_analysis.ipynb  
+├── .gitignore  
+├── domain_adaptation_algorithms/  
+│   ├── method1.py  
+│   ├── method2.py  
+│   └── …  
+├── modules/  
+│   ├── feature_extractor.py  
+│   └── classifier.py  
+├── statistical_models/  
+│   └── baseline_models.py  
+├── utils/  
+│   └── helpers.py  
+└── Documentation/  
+    ├── pipeline.png  
+    └── other figures, tables  
+
+
