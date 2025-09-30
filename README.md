@@ -1,7 +1,7 @@
 ## Supervised domain adaptation techniques for the classification of abnormal respiratory sounds 🩺
 *Master of Science Thesis — CEID, University of Patras*
 
-<img width="591" height="242" alt="image" src="https://github.com/user-attachments/assets/fbcc3575-82c4-4e2d-9844-b0f986a6d7d9" />
+<img width="491" height="192" alt="image" src="https://github.com/user-attachments/assets/fbcc3575-82c4-4e2d-9844-b0f986a6d7d9" />
 
 ---
 
