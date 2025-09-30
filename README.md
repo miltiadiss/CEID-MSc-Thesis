@@ -122,9 +122,10 @@ In essence, the domain adaptation models are based on **adversarial training** a
 
 /
 ├── README.md  
-├── config.yaml  
-├── RSDB_analysis.ipynb  
-├── .gitignore  
+├── config.yaml   
+├── .gitignore
+├── LICENSE.txt
+├── requirments.txt
 
 ├── domain_adaptation_algorithms/  
 │   ├── dann.py  
@@ -137,6 +138,9 @@ In essence, the domain adaptation models are based on **adversarial training** a
 │   ├── feature_extraction.ipynb  
 │   ├── domain_adaptation.ipynb  
 │   └── classification.ipynb  
+
+├── RSDB/  
+│   ├── RSDB_analysis.ipynb 
 
 ├── statistical_models/   
 │   ├── evaluate.py  
