@@ -54,10 +54,11 @@ Key research questions include:
 
 The methodology pipeline comprises the following stages:
 
-1. **Preprocessing & feature extraction**  
-2. **Baseline classifier training**  
-3. **Domain adaptation module**  
-4. **Evaluation across domains**
+1. **Preprocessing**  
+2. **Feature extraction**
+3. **Baseline classifier training**
+4. **Supervised domain adaptation**  
+5. **Evaluation across different devices**
 
 Below is a simplified architecture diagram:
 
