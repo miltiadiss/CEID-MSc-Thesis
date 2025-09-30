@@ -94,17 +94,24 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 
 - Conducted experiments across **Respiratory Sound Database (RSDB)**: https://www.kaggle.com/datasets/vbookshelf/respiratory-sound-database 
 - Compared baseline classifiers (**k-NN, SVM, Random Forest, XGBoost**) performance before and after the implementation of supervised domain adaptation  
-- Metrics: **Accuracy, Weighted F1-score, Macro AUC** for **total evaluation** & **Confusion matrices, ROC curves, Precision-Recall curves, Sensitivity, Specificity, F1-Score, MCC** for **class-wise evaluation** 
+- Metrics: **Accuracy, Weighted F1-score, Macro AUC** for **total evaluation** & **Confusion matrices, ROC curves, Precision-Recall curves, Sensitivity, Specificity, F1-Score, MCC** for **class-wise evaluation**
+
+| Classifier | Accuracy | Macro AUC | Weighted F1-score |
+|--------|----------|----------|----------|
+| k-NN | 0.68 | 0.78 | 0.66 |
+| **Non-Linear SVM** | 0.71 | 0.79 | 0.69 |
+| Random Forest | 0.77 (+13.2%) | 0.86 | 0.77 |
+| XGBoost | 0.74 | 0.85 | 0.74 |
 
 **Best classifier**: Non-Linear SVM with **C=10.0, γ='scale'**
 
 | Method | Accuracy | Macro AUC | Weighted F1-score |
 |--------|----------|----------|----------|
-| Baseline | 75.3 % | 0.68 | |
-| DANN | A → B | 0.75 | |
-| CDAN | A → B | 0.73 | |
-| DANN with VAE (joint training) | A → B | 0.73 | |
-| DANN with VAE (sequential training) | A → B | 0.73 | |
+| Baseline | 0.68 | 0.78 | 0.66 |
+| DANN | 0.71 | 0.79 | 0.69 |
+| **CDAN** | **0.77 (+13.2%)** | **0.86** | **0.77** |
+| DANN with VAE (joint training) | 0.74 | 0.85 | 0.74 |
+| DANN with VAE (sequential training) | 0.74 | 0.84 | 0.73 |
 
 **Best domain adaptation method**: CDAN with **λ=0.2**
 
