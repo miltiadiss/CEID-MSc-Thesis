@@ -12,12 +12,12 @@
 1. [Introduction](#introduction)  
 2. [Motivation & Background](#motivation--background)  
 3. [Objectives](#objectives)  
-4. [Methodology & Architecture](#methodology--architecture)  
-5. [Implementation](#implementation)  
-6. [Experiments & Evaluation](#experiments--evaluation)  
-7. [Usage Instructions](#usage-instructions)  
-8. [Dependencies](#dependencies)  
-9. [Repository Structure](#repository-structure)  
+4. [Methodology & Architecture](#methodology--architecture)   
+5. [Experiments & Evaluation](#experiments--evaluation)
+6. [Repository Structure](#repository-structure)
+7. [Implementation](#implementation)  
+8. [Usage Instructions](#usage-instructions)  
+9. [Dependencies](#dependencies)  
 
 ---
 
@@ -71,22 +71,6 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 1. **Domain Adversarial Neural Network (DANN)**
 2. **Conditional Domain Adversarial Network (CDAN)**
 3. **Domain Adversarial Neural Network with Variational Autoencoder (DANN with VAE)**
-
----
-
-## Implementation
-
-- **Languages / Tools**: Primarily Python, Jupyter Notebooks  
-- **Key Modules / Packages**: `domain_adaptation_algorithms/`, `modules/`, `statistical_models/`, `utils/`  
-- **Configuration**: `config.yaml` holds settings (paths, hyperparameters, domain adaptation choices)  
-- **Notebook**: `RSDB_analysis.ipynb` for exploratory analysis of the database 
-- **Visualization / results**: stored under `Documentation/` folder  
-
-Μain scripts:
-
-- adaptation modules inside `domain_adaptation_algorithms/`  
-- helper functions in `utils/`  
-- baseline and statistical models in `statistical_models/`  
 
 ---
 
@@ -151,12 +135,35 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 |   ├── domain_adaptation.ipynb
 │   └── classification.ipynb
 ├── statistical_models/  
-│   └── baseline_models.py  
+│   ├── knn.py  
+|   ├── svm.py
+|   ├── rf.py
+|   ├── xgboost.py
+│   └── evaluation.py
 ├── utils/  
-│   └── helpers.py  
-└── Documentation/  
-    ├── pipeline.png  
-    └── other figures, tables  
+│   ├── audio_preprocessing.py  
+│   ├── plots.py
+│   ├── metrics.py
+│   └── neural_networks.py  
+└── Documentation/   
+
+---
+
+## Implementation
+
+- **Languages / Tools**: Primarily Python, Jupyter Notebooks  
+- **Key Modules / Packages**: `domain_adaptation_algorithms/`, `modules/`, `statistical_models/`, `utils/`  
+- **Configuration**: `config.yaml` holds settings (paths, hyperparameters, domain adaptation choices)  
+- **Notebook**: `RSDB_analysis.ipynb` for exploratory analysis of the database 
+- **Visualization / results**: stored under `Documentation/` folder  
+
+Μain scripts:
+
+- adaptation modules inside `domain_adaptation_algorithms/`  
+- helper functions in `utils/`  
+- baseline and statistical models in `statistical_models/`  
+
+---
 
 ## Usage Instructions
 
