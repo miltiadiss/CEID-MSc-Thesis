@@ -1,4 +1,4 @@
-# Classification of Abnormal Respiratory Sounds using Machine Learning and Domain Adaptation 🩺
+# Supervised domain adaptation techniques for the classification of abnormal respiratory sounds 🩺
 
 **Pipeline of the applied methodology**
 <p align="center">
