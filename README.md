@@ -169,7 +169,7 @@ In essence, the domain adaptation models are based on **adversarial training** a
 
 ---
 
-## Usage Instructions
+## Usage Instructions & Deoendencies
 
 To run the project:
 
@@ -192,3 +192,30 @@ python main.py --config config.yaml
 
 # Or launch Jupyter notebook
 jupyter notebook RSDB_analysis.ipynb
+
+---
+
+The project is implemented in **Python 3.8+** and requires the following packages:
+
+- **Core libraries**:  
+  - numpy, pandas, scipy, pyyaml  
+
+- **Machine Learning / Deep Learning**:  
+  - scikit-learn  
+  - PyTorch (torch, torchvision)  
+  - xgboost  
+
+- **Audio processing**:  
+  - librosa  
+
+- **Visualization**:  
+  - matplotlib  
+  - seaborn  
+
+- **Notebooks**:  
+  - jupyter, notebook  
+
+You can install all dependencies via:
+
+```bash
+pip install -r requirements.txt
