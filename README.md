@@ -78,12 +78,11 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 - **Languages / Tools**: Primarily Python, Jupyter Notebooks  
 - **Key Modules / Packages**: `domain_adaptation_algorithms/`, `modules/`, `statistical_models/`, `utils/`  
 - **Configuration**: `config.yaml` holds settings (paths, hyperparameters, domain adaptation choices)  
-- **Notebook**: `RSDB_analysis.ipynb` for exploratory and result analysis  
-- **Visualization / results**: stored under `Documentation/` and output folders  
+- **Notebook**: `RSDB_analysis.ipynb` for exploratory analysis of the database 
+- **Visualization / results**: stored under `Documentation/` folder  
 
-Examples of main scripts:
+Μain scripts:
 
-- `main.py` (if applicable)  
 - adaptation modules inside `domain_adaptation_algorithms/`  
 - helper functions in `utils/`  
 - baseline and statistical models in `statistical_models/`  
@@ -92,20 +91,16 @@ Examples of main scripts:
 
 ## Experiments & Evaluation
 
-- Conducted experiments across multiple respiratory sound datasets (different domains)  
-- Compared baseline classifiers (without adaptation) vs models with supervised domain adaptation  
-- Metrics: accuracy, F1-score, confusion matrices, domain discrepancy measures  
-- Visualizations and comparative plots are included in the documentation  
-
-> **Note**: You should provide numeric tables and plots here once finalized—for example:
-
+- Conducted experiments across **Respiratory Sound Database (RSDB)**
+- Compared baseline classifiers (**k-NN, SVM, Random Forest, XGBoost**) performance before and after the implementation of supervised domain adaptation  
+- Metrics: **Accuracy, Weighted F1-score, Macro AUC** for **total evaluation** & **Confusion matrices, ROC curves, Precision-Recall curves, Sensitivity, Specificity, F1-Score, MCC** for **class-wise evaluation** 
+- Visualizations and comparative plots are show below:
+  
 | Method | Source → Target | Accuracy | F1-score |
 |--------|------------------|----------|----------|
 | Baseline | Dataset A → B | 75.3 % | 0.68 |
 | DA Method 1 | A → B | **82.1 %** | 0.75 |
 | DA Method 2 | A → B | 80.4 % | 0.73 |
-
-Include confusion matrices, ROC curves, etc.
 
 ---
 
