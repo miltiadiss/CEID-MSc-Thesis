@@ -67,7 +67,7 @@ Below is a simplified architecture diagram:
   <img width="569" height="302" alt="pipeline (2)" src="https://github.com/user-attachments/assets/0885baa4-e676-4e37-8417-87a2acdb02bc" />
 </p>
 
-In essence, the domain adaptation models are based on **adversarial learning**, which forces them to learn embeddings where the different device distributions are aligned, while maintaining class-discriminative power. Various adversarial methods were implemented and compared, including:
+In essence, the domain adaptation models are based on **adversarial training** architecture, which forces them to learn embeddings where the different device distributions are aligned, while maintaining class-discriminative power. Various adversarial methods were implemented and compared, including:
 1. **Domain Adversarial Neural Network (DANN)**
 2. **Conditional Domain Adversarial Network (CDAN)**
 3. **Domain Adversarial Neural Network with Variational Autoencoder (DANN with VAE)**
@@ -134,9 +134,9 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 
 ├── modules/  
 │   ├── preprocessing.ipynb  
-│   ├── feature_extraction.ipynb 
-│   ├── domain_adaptation.ipynb
-│   └── classification.ipynb
+│   ├── feature_extraction.ipynb  
+│   ├── domain_adaptation.ipynb  
+│   └── classification.ipynb  
 
 ├── statistical_models/   
 │   ├── evaluate.py  
@@ -157,8 +157,8 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 
 ## Implementation
 
-- **Languages / Tools**: Primarily Python, Jupyter Notebooks  
-- **Key Modules / Packages**: adaptation modules inside `domain_adaptation_algorithms/`, pipeline modules in `modules/`, baseline and statistical models in `statistical_models/`, helper functions in `utils/` 
+- **Languages / Tools**: Python, Jupyter Notebooks  
+- **Key Modules / Packages**: adaptation methods inside `domain_adaptation_algorithms/`, pipeline modules in `modules/`, baseline and statistical models in `statistical_models/`, helper functions in `utils/` 
 - **Configuration**: `config.yaml` holds settings (paths, hyperparameters, domain adaptation choices)  
 - **Database**: `RSDB_analysis.ipynb` for exploratory analysis of the database 
 - **Report and results**: stored under `Documentation/` folder    
