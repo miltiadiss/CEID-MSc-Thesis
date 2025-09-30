@@ -1,11 +1,6 @@
 ## Supervised domain adaptation techniques for the classification of abnormal respiratory sounds 🩺
 *Master of Science Thesis — CEID, University of Patras*
 
-**Proposd methodology**
-<p align="center">
-  <img width="859" height="442" alt="pipeline (2)" src="https://github.com/user-attachments/assets/0885baa4-e676-4e37-8417-87a2acdb02bc" />
-</p>
-
 ---
 
 ## Table of Contents
@@ -27,9 +22,7 @@
 
 ## Introduction
 
-This repository contains the implementation and artifacts of my MSc thesis on **“Supervised domain adaptation techniques for the classification of abnormal respiratory sounds.”** The goal is to improve classification of pathological respiratory audio across domains by leveraging domain adaptation methods.
-
-The thesis aims to address the common issue of **domain shift** between different recording devices of respiratory sounds and to develop models that generalize better to unseen devices.
+This repository contains the implementation and artifacts of my MSc thesis on **“Supervised domain adaptation techniques for the classification of abnormal respiratory sounds.”** The thesis aims to address the common issue of **domain shift** between different recording devices of respiratory sounds and to develop models that generalize better to unseen devices. The goal is to improve the classification of pathological respiratory audio across domains by leveraging domain adaptation methods.
 
 ---
 
@@ -68,14 +61,9 @@ The methodology pipeline comprises the following stages:
 
 Below is a simplified architecture diagram:
 
-[ Source domain data ] → Feature Extractor → Shared embedding
-↘
-Domain Adaptation Module → Discriminator / Regularizer
-↘
-[ Target domain data (labeled) ] → Embedding → Classifier
-
-yaml
-Αντιγραφή κώδικα
+<p align="center">
+  <img width="859" height="442" alt="pipeline (2)" src="https://github.com/user-attachments/assets/0885baa4-e676-4e37-8417-87a2acdb02bc" />
+</p>
 
 In essence, the model learns embeddings where source and target distributions are aligned, while maintaining class-discriminative power.
 
