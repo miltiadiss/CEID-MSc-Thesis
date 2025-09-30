@@ -197,9 +197,12 @@ venv\Scripts\activate      # Windows PowerShell
 # Install dependencies
 pip install -r requirements.txt
 
-# Run main script / experiments
-python main.py --config config.yaml
+# Example: train and evaluate a domain adaptation model
+python domain_adaptation_algorithms/dann.py --config config.yaml
 
-# Or launch a Jupyter notebook
-jupyter notebook RSDB_analysis.ipynb
+# Example: run a statistical model
+python statistical_models/random_forest.py
+
+# Or explore module-specific notebooks
+jupyter notebook modules/preprocessing.ipynb
 ```
