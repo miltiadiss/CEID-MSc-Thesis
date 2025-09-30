@@ -54,7 +54,7 @@ Key research questions include:
 
 The methodology pipeline comprises the following stages:
 
-1. **Preprocessing**  
+1. **Preprocessing & dataset augmentation**  
 2. **Feature extraction**
 3. **Baseline classifier training**
 4. **Supervised domain adaptation**  
@@ -66,9 +66,10 @@ Below is a simplified architecture diagram:
   <img width="659" height="342" alt="pipeline (2)" src="https://github.com/user-attachments/assets/0885baa4-e676-4e37-8417-87a2acdb02bc" />
 </p>
 
-In essence, the model learns embeddings where source and target distributions are aligned, while maintaining class-discriminative power.
-
-Various supervised domain adaptation methods (e.g. discrepancy-based, adversarial) were implemented and compared.
+In essence, the domain adaptation models are based on **adversarial learning**, which forces them to learn embeddings where the different device distributions are aligned, while maintaining class-discriminative power. Various adversarial methods were implemented and compared, including:
+1. **Domain Adversarial Neural Network (DANN)**
+2. **Conditional Domain Adversarial Network (CDAN)**
+3. **Domain Adversarial Neural Network with Variational Autoencoder (DANN with VAE)**
 
 ---
 
