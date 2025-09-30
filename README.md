@@ -127,15 +127,18 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 ├── .gitignore  
 
 ├── domain_adaptation_algorithms/  
-│   ├── __init__.py  
 │   ├── dann.py  
 │   ├── cdan.py  
 │   ├── davae.py  
-│   ├── spectrum_correction.py  
-│   └── modules/  
+│   └── spectrum_correction.py  
 
-├── statistical_models/  
-│   ├── __init__.py  
+├── modules/  
+│   ├── preprocessing.ipynb  
+│   ├── feature_extraction.ipynb 
+│   ├── domain_adaptation.ipynb
+│   └── classification.ipynb
+
+├── statistical_models/   
 │   ├── evaluate.py  
 │   ├── knn.py  
 │   ├── non_linear_svm.py  
@@ -143,7 +146,6 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 │   └── xgboost.py  
 
 ├── utils/  
-│   ├── __init__.py  
 │   ├── audio_preprocessing.py  
 │   ├── metrics.py  
 │   ├── neural_networks.py  
