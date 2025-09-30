@@ -96,9 +96,9 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 - Compared baseline classifiers (**k-NN, SVM, Random Forest, XGBoost**) performance before and after the implementation of supervised domain adaptation  
 - Metrics: **Accuracy, Weighted F1-score, Macro AUC** for **total evaluation** & **Confusion matrices, ROC curves, Precision-Recall curves, Sensitivity, Specificity, F1-Score, MCC** for **class-wise evaluation**
 
-**Best classifier**: Non-Linear SVM with **C=10.0, γ='scale'**
+**Best classifier**: Non-Linear SVM with *C*=10.0, *γ*='scale'
 
-**Best domain adaptation method**: CDAN with **λ=0.2**
+**Best domain adaptation method**: CDAN with *λ*=0.2
 
 | Method | Accuracy | Macro AUC | Weighted F1-score |
 |--------|----------|----------|----------|
@@ -108,18 +108,22 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 | DANN with VAE (joint training) | 0.74 (+8.8%) | 0.85 | 0.74 |
 | DANN with VAE (sequential training) | 0.74 (+8.8%) | 0.84 | 0.73 |
 
-<img width="367" height="329" alt="image" src="https://github.com/user-attachments/assets/355fc441-d491-44ce-9d50-81bd74e1df21" />
-<img width="367" height="329" alt="image" src="https://github.com/user-attachments/assets/a793ac2a-6017-47d5-8160-a29d6f0c294e" />
-
-<img width="274" height="207" alt="image" src="https://github.com/user-attachments/assets/c7c4c7c5-e809-4388-83ef-c5faaf877ec2" />
-<img width="274" height="207" alt="image" src="https://github.com/user-attachments/assets/7a006364-87d8-44b6-b52a-7fd08aaecab0" />
-<img width="274" height="207" alt="image" src="https://github.com/user-attachments/assets/dca49392-aabf-4bd7-8247-ec6fc722ac29" />
-
 | Class | Sensitivity | Specificity | F1-score | MCC |
 |--------|----------|----------|----------|----------|
 | Normal | 0.83 | 0.73 | 0.82 | 0.78 |
 | Crackle | 0.71 | 0.89 | 0.72 | 0.61 |
 | Wheeze | 0.65 | 0.96 | 0.68 | 0.80 |
+
+**Feature distribution across different classes and devices after the implementation of CDAN:**
+
+<img width="367" height="329" alt="image" src="https://github.com/user-attachments/assets/355fc441-d491-44ce-9d50-81bd74e1df21" />
+<img width="367" height="329" alt="image" src="https://github.com/user-attachments/assets/a793ac2a-6017-47d5-8160-a29d6f0c294e" />
+
+**Confusion matrix, ROC curve, Precision-Recall curve after the implementation of Non-Linear SVM on the adapted features:**
+
+<img width="234" height="187" alt="image" src="https://github.com/user-attachments/assets/c7c4c7c5-e809-4388-83ef-c5faaf877ec2" />
+<img width="274" height="187" alt="image" src="https://github.com/user-attachments/assets/7a006364-87d8-44b6-b52a-7fd08aaecab0" />
+<img width="274" height="187" alt="image" src="https://github.com/user-attachments/assets/dca49392-aabf-4bd7-8247-ec6fc722ac29" />
 
 ---
 
