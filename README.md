@@ -91,7 +91,7 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 
 ## Experiments & Evaluation
 
-- Conducted experiments across **Respiratory Sound Database (RSDB)**
+- Conducted experiments across **Respiratory Sound Database (RSDB)**: https://www.kaggle.com/datasets/vbookshelf/respiratory-sound-database 
 - Compared baseline classifiers (**k-NN, SVM, Random Forest, XGBoost**) performance before and after the implementation of supervised domain adaptation  
 - Metrics: **Accuracy, Weighted F1-score, Macro AUC** for **total evaluation** & **Confusion matrices, ROC curves, Precision-Recall curves, Sensitivity, Specificity, F1-Score, MCC** for **class-wise evaluation** 
 - Visualizations and comparative plots are show below:
