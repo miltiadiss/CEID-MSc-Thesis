@@ -108,15 +108,15 @@ In essence, the domain adaptation models are based on **adversarial learning**, 
 | Method | Accuracy | Macro AUC | Weighted F1-score |
 |--------|----------|----------|----------|
 | Baseline | 0.68 | 0.78 | 0.66 |
-| DANN | 0.71 | 0.79 | 0.69 |
+| DANN | 0.71 (+4.4%) | 0.79 | 0.69 |
 | **CDAN** | **0.77 (+13.2%)** | **0.86** | **0.77** |
-| DANN with VAE (joint training) | 0.74 | 0.85 | 0.74 |
-| DANN with VAE (sequential training) | 0.74 | 0.84 | 0.73 |
+| DANN with VAE (joint training) | 0.74 (+8.8%) | 0.85 | 0.74 |
+| DANN with VAE (sequential training) | 0.74 (+8.8%) | 0.84 | 0.73 |
 
 **Best domain adaptation method**: CDAN with **λ=0.2**
 
-<img width="417" height="354" alt="image" src="https://github.com/user-attachments/assets/355fc441-d491-44ce-9d50-81bd74e1df21" />
-<img width="417" height="354" alt="image" src="https://github.com/user-attachments/assets/a793ac2a-6017-47d5-8160-a29d6f0c294e" />
+<img width="367" height="329" alt="image" src="https://github.com/user-attachments/assets/355fc441-d491-44ce-9d50-81bd74e1df21" />
+<img width="367" height="329" alt="image" src="https://github.com/user-attachments/assets/a793ac2a-6017-47d5-8160-a29d6f0c294e" />
 
 ---
 
