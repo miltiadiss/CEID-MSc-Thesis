@@ -22,7 +22,7 @@
 
 ## Introduction
 
-This repository contains the implementation and artifacts of my MSc thesis on **“Supervised domain adaptation techniques for the classification of abnormal respiratory sounds.”** The thesis aims to address the common issue of **domain shift** between different recording devices of respiratory sounds and to develop models that generalize better to unseen devices. The goal is to improve the classification of pathological respiratory audio across domains by leveraging sypervised domain adaptation methods.
+This repository contains the implementation and artifacts of my MSc thesis on **“Supervised domain adaptation techniques for the classification of abnormal respiratory sounds.”** The thesis aims to address the common issue of **domain shift** between different recording devices of respiratory sounds and to develop models that generalize better to unseen devices. The goal is to improve the classification of pathological respiratory audio across domains by leveraging supervised domain adaptation methods.
 
 ---
 
