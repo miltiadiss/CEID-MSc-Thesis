@@ -15,10 +15,10 @@
 4. [Methodology & Architecture](#methodology--architecture)   
 5. [Experiments & Evaluation](#experiments--evaluation)
 6. [Repository Structure](#repository-structure)
-7. [Implementation](#implementation)  
-8. [Usage Instructions](#usage-instructions)  
-9. [Dependencies](#dependencies)  
-
+7. [Implementation](#implementation)
+8. [Dependencies](#dependencies) 
+9. [Usage Instructions](#usage-instructions)  
+    
 ---
 
 ## Introduction
@@ -123,9 +123,9 @@ In essence, the domain adaptation models are based on **adversarial training** a
 /
 ├── README.md  
 ├── config.yaml   
-├── .gitignore
-├── LICENSE.txt
-├── requirments.txt
+├── .gitignore  
+├── LICENSE.txt  
+├── requirements.txt  
 
 ├── domain_adaptation_algorithms/  
 │   ├── dann.py  
@@ -140,7 +140,7 @@ In essence, the domain adaptation models are based on **adversarial training** a
 │   └── classification.ipynb  
 
 ├── RSDB/  
-│   ├── RSDB_analysis.ipynb 
+│   └── RSDB_analysis.ipynb  
 
 ├── statistical_models/   
 │   ├── evaluate.py  
@@ -169,6 +169,18 @@ In essence, the domain adaptation models are based on **adversarial training** a
 
 ---
 
+### Dependencies
+
+The project requires **Python 3.8+** and the following packages:
+
+- **Core libraries**: numpy, pandas, scipy, pyyaml  
+- **Machine Learning / Deep Learning**: scikit-learn, torch, torchvision, xgboost  
+- **Audio processing**: librosa  
+- **Visualization**: matplotlib, seaborn  
+- **Notebooks**: jupyter, notebook
+
+---
+
 ## Usage Instructions
 
 To run the project:
@@ -185,28 +197,9 @@ venv\Scripts\activate      # Windows PowerShell
 # Install dependencies
 pip install -r requirements.txt
 
-# Edit configuration if needed
-# For example, open config.yaml and set paths, hyperparameters, domain adaptation method
-
 # Run main script / experiments
 python main.py --config config.yaml
 
-# Or launch Jupyter notebook
+# Or launch a Jupyter notebook
 jupyter notebook RSDB_analysis.ipynb
-```
-
-### Dependencies
-
-The project requires **Python 3.8+** and the following packages:
-
-- **Core libraries**: numpy, pandas, scipy, pyyaml  
-- **Machine Learning / Deep Learning**: scikit-learn, torch, torchvision, xgboost  
-- **Audio processing**: librosa  
-- **Visualization**: matplotlib, seaborn  
-- **Notebooks**: jupyter, notebook  
-
-Install all dependencies with:
-
-```bash
-pip install -r requirements.txt
 ```
